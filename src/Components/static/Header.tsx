@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
 import Button from '../reuse/Button';
+import {Link} from "react-router-dom"
 
 
 const Header = () => {
@@ -11,8 +12,12 @@ const Header = () => {
           <Logo>JETFIT</Logo>
           <Learn>WorkOut Plans</Learn>
           <Auth>
+          <Link to="/sign-in" style={{textDecoration: "none"}}>
           <Button text="Sign In" fw="550" bg="white" cc="blue" hbg="blue" hcc="white" hb="" fs="19px" bb='7px' w='110px'/>
+          </Link>
+          <Link to="/sign-up" style={{textDecoration: "none"}}>
           <Button text="Sign Up" fw="550" bg="white" cc="blue" hbg="blue" hcc="white" hb="" fs="19px" bb='7px' w='110px' />
+          </Link>
           </Auth>
         </Main>
       </Container>

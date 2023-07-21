@@ -61,7 +61,7 @@ align-items: center;
 `
 const Container = styled.div`
 width: 100%;
-height: 100vh;
+height: 120vh;
 background-image: url(https://static.wixstatic.com/media/754e92_6bf49b9554bb4b00a53272dee4c608e7~mv2.jpg/v1/fill/w_1304,h_712,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/754e92_6bf49b9554bb4b00a53272dee4c608e7~mv2.jpg);
 background-color: rgb(19,65,74);
 position: relative;

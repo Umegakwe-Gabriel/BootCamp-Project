@@ -4,6 +4,9 @@ import {Outlet} from "react-router-dom"
 import Hero from '../../Pages/Hero'
 import AfterHero from '../../Pages/AfterHero'
 import Needs from '../../Pages/Needs'
+import Suit from '../../Pages/Suit'
+import BeforeFooter from '../../Pages/BeforeFooter'
+import Footer from '../static/Footer'
 
 const LayOut = () => {
   return (
@@ -13,6 +16,9 @@ const LayOut = () => {
         <Hero/>
         <AfterHero/>
         <Needs/>
+        <Suit/>
+        <BeforeFooter/>
+        <Footer/>
     </div>
   )
 }
