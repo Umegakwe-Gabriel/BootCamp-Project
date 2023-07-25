@@ -1,42 +1,82 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import Button from '../Components/reuse/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import * as yup from "yup"
+import {useForm} from "react-hook-form"
+import {yupResolver} from "@hookform/resolvers/yup"
+import { CreateUser } from '../Utils/AuthApi';
 
 const SignUp = () => {
+
+  const navigate = useNavigate()
+  const schema = yup.object({
+    userName: yup.string().required(),
+    email: yup.string().required(),
+    password: yup.string().required(),
+    confirm: yup.string().oneOf([yup.ref("password")]),
+  })
+
+
+
+
+  const {
+    register,
+    formState: {errors},
+    handleSubmit,
+    reset,
+  }=useForm({
+    resolver: yupResolver(schema)
+  })
+
+  const onSubmit = handleSubmit(async (res: any)=>{
+    const {userName, email, password} = res
+
+    const formData = new FormData()
+    formData.append("userName", userName)
+    formData.append("email", email)
+    formData.append("password", password)
+
+      CreateUser(formData)
+
+      reset()
+      navigate("/sign-in")
+  })
   return (
     <>
       <Container>
         <Main>
           <Write>JETFIT</Write>
-          <Holder>
-            <Top>
-            <Image/>
-            <ImageInput/>
-            <ImageLabel>Update an Image</ImageLabel>
-            </Top>
+          <Holder onSubmit={onSubmit}>
+            
             <Holder1>
             <Bottom>
               <TextHolder>UserName: </TextHolder>
-                <Input placeholder='Enter Your UserName'/>
+                <Input placeholder='Enter Your UserName'
+                {...register("userName")}/>
+                {errors.userName && <Error>userName Error</Error>}
             </Bottom>
             <Bottom>
               <TextHolder>Email: </TextHolder>
-                <Input placeholder='Enter Your Email'/>
+                <Input placeholder='Enter Your Email' {...register("email")}/>
+                {errors.userName && <Error>email Error</Error>}
             </Bottom>
             <Bottom>
               <TextHolder>Password: </TextHolder>
-                <Input placeholder='Enter Your Password'/>
+                <Input placeholder='Enter Your Password' {...register("password")}/>
+                {errors.userName && <Error>password Error</Error>}
             </Bottom>
             <Bottom>
               <TextHolder>Confirm: </TextHolder>
-                <Input placeholder='Confirm Your Password'/>
+                <Input placeholder='Confirm Your Password' {...register("confirm")}/>
+                {errors.confirm && <Error>confirm password Error</Error>}
             </Bottom>
-            <ButtonHolder>
-            <Link to="/sign-in" style={{textDecoration: "none"}}>
-            <Button text="Create Account" fw="600" bg="rgb(56,183,254)" cc="white" hbg="white" hcc="rgb(56,183,254)" hb="2px solid rgb(56,183,254)" fs="21px" bb='20px' w='300px'/>
-            </Link>
-            </ButtonHolder>
+
+            {/* <Link to="/sign-in" style={{textDecoration: "none"}}> */}
+            <Button type='submit' onClick={()=>{
+              navigate("/sign-in")
+            }}>Sign Up</Button>
+             {/* </Link> */}
+
             <Div>
               <span>Already have an account?</span>
               <Link to="/sign-in">
@@ -56,19 +96,32 @@ const SignUp = () => {
 
 export default SignUp;
 
+const Button = styled.button`
+  width: 300px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  background-color: dodgerblue;
+  border-radius: 20px;
+  border: none;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+`
+const Error = styled.div`
+  font-size: 12px;
+  color: #c9016c;
+`
 const ButtonHolder = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
 margin-top: 15px;
 `
-const ImageLabel = styled.label`
-padding: 10px 18px;
-border-radius: 30px;
-background-color: rgb(56,183,254);
-color: white;
-margin-top: 10px;
-`
+
 const Div = styled.div`
 display: flex;
 justify-content: center;
@@ -78,24 +131,7 @@ font-size: 18px;
 font-weight: 400;
 margin-top: 15px;
 `
-const ImageInput = styled.input`
-display: none;
-`
-const Image = styled.img`
-width: 100px;
-height: 100px;
-border-radius: 50%;
-object-fit: cover;
-border: 1px solid dodgerblue;
-`
-const  Top = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
-margin-top: 20px;
-`
+
 const Account = styled.div`
   color: #303030;
   font-size: 40px;

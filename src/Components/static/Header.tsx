@@ -10,7 +10,7 @@ const Header = () => {
       <Container>
         <Main>
           <Logo>JETFIT</Logo>
-          <Learn>WorkOut Plans</Learn>
+          <Learn to="/main/workout" >WorkOut Plans</Learn>
           <Auth>
           <Link to="/sign-in" style={{textDecoration: "none"}}>
           <Button text="Sign In" fw="550" bg="white" cc="blue" hbg="blue" hcc="white" hb="" fs="19px" bb='7px' w='110px'/>
@@ -30,7 +30,7 @@ export default Header;
 const Auth = styled.div`
 display: flex;
 `
-const Learn = styled.div`
+const Learn = styled(Link)`
 font-size: 19px;
 line-height: 70px;
 font-weight: 400;

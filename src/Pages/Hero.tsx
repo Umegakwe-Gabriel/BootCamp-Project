@@ -31,12 +31,13 @@ const Hold = styled.div`
 const Img = styled.img`
 width: 640px;
 margin-left: 45px;
+margin-top: 120px;
 `
 const SmallTxt = styled.div`
 font-family: Montserrat, sans-serif;
 font-size: 30px;
 font-weight: 700;
-line-height: 29px;
+line-height: 40px;
 font-style: italic;
 color: white;
 width: 555px;
@@ -48,6 +49,7 @@ font-weight: 700;
 line-height: 60px;
 color: white;
 margin-bottom: 30px;
+margin-top: 160px;
 width: 555px;
 `
 const Holder = styled.div`
@@ -61,7 +63,7 @@ align-items: center;
 `
 const Container = styled.div`
 width: 100%;
-height: 120vh;
+height: 100vh;
 background-image: url(https://static.wixstatic.com/media/754e92_6bf49b9554bb4b00a53272dee4c608e7~mv2.jpg/v1/fill/w_1304,h_712,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/754e92_6bf49b9554bb4b00a53272dee4c608e7~mv2.jpg);
 background-color: rgb(19,65,74);
 position: relative;

@@ -1,28 +1,65 @@
 import React from 'react'
 import styled from 'styled-components';
-import Button from '../Components/reuse/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
+import * as yup from "yup"
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SignInUser } from '../Utils/AuthApi';
+import { signUserGlobal } from '../Global/AuthGlobal';
 
 const SignIn = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = useSelector((state: any)=> state.user)
+
+  const schema = yup.object({
+    email: yup.string().required(),
+    password: yup.string().required(),
+
+  })
+
+  const {
+    register,
+    formState: {errors},
+    handleSubmit,
+    reset
+  }= useForm({
+    resolver: yupResolver(schema)
+  })
+
+  const onSubmit = handleSubmit(async(res: any)=>{
+    SignInUser(res).then((resp)=>{
+      dispatch(signUserGlobal(resp))
+      navigate("/main")
+    }).catch(err => {
+      console.log(err)
+    })
+  })
+
   return (
     <>
       <Container>
         <Main>
           <Write>JETFIT</Write>
-          <Holder>
+          <Holder onSubmit={onSubmit}>
           <Account>Sign In</Account>
             <Holder1>
             <Bottom>
               <TextHolder>Email: </TextHolder>
-                <Input placeholder='Enter Your Email'/>
+                <Input placeholder='Enter Your Email' {...register("email")}/>
+                {errors.email && <Error>email error</Error>}
             </Bottom>
             <Bottom>
               <TextHolder>Password: </TextHolder>
-                <Input placeholder='Enter Your Password'/>
+                <Input placeholder='Enter Your Password' {...register("password")}/>
+                {errors.email && <Error>password error</Error>}
             </Bottom>
-            <ButtonHolder>
-            <Button text="Sign In" fw="600" bg="rgb(56,183,254)" cc="white" hbg="white" hcc="rgb(56,183,254)" hb="2px solid rgb(56,183,254)" fs="21px" bb='20px' w='300px'/>
-            </ButtonHolder>
+
+            <Button type="submit" onClick={()=>{
+              navigate("/main")
+            }}>Sign In</Button>
             <Div>
               <span>Don't have an account?</span>
               <Link to="/sign-up">
@@ -52,6 +89,26 @@ border-radius: 30px;
 background-color: rgb(56,183,254);
 color: white;
 margin-top: 10px;
+`
+const Button = styled.button`
+  width: 99%;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  font-family: Poppins;
+  font-size: 15px;
+  margin-top: 20px;
+`
+const Error = styled.div`
+  font-size: 12px;
+  color: #c9016c;
 `
 const Div = styled.div`
 display: flex;

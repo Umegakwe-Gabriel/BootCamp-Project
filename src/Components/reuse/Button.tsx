@@ -13,13 +13,14 @@ interface iBtn {
    w?: string;
    bb?: string;
    b?: string;
+   type?: string;
 }
 
 const Button: React.FC<iBtn> = ({text, fw, bg, cc, hbg, hcc, hb, fs, w, bb, b}) => {
   return (
     <div>
-      <Container fw={`${fw}`} bg={`${bg}`} cc={`${cc}`} hbg={`${hbg}`} hcc={`${hcc}`} hb={`${hb}`} fs={`${fs}`} w={`${w}`} bb={`${bb}`} b={`${b}`}>
-        {text}
+      <Container fw={`${fw}`} bg={`${bg}`} cc={`${cc}`} hbg={`${hbg}`} hcc={`${hcc}`} hb={`${hb}`} fs={`${fs}`} w={`${w}`} bb={`${bb}`} b={`${b}`} >
+        {text} 
       </Container>
     </div>
   )
