@@ -91,7 +91,7 @@ color: white;
 margin-top: 10px;
 `
 const Button = styled.button`
-  width: 99%;
+  width: 220px;
   height: 40px;
   justify-content: center;
   align-items: center;
@@ -105,6 +105,7 @@ const Button = styled.button`
   font-family: Poppins;
   font-size: 15px;
   margin-top: 20px;
+  margin-left: 100px;
 `
 const Error = styled.div`
   font-size: 12px;

@@ -110,6 +110,7 @@ const Button = styled.button`
   font-weight: 700;
   color: white;
   cursor: pointer;
+  margin-left: 60px;
 `
 const Error = styled.div`
   font-size: 12px;
