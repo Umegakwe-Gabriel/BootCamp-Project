@@ -98,14 +98,14 @@ const Button = styled.button`
   display: flex;
   background-color: dodgerblue;
   color: white;
-  border-radius: 3px;
+  border-radius: 20px;
   cursor: pointer;
   border: 0;
   outline: none;
   font-family: Poppins;
   font-size: 15px;
   margin-top: 20px;
-  margin-left: 100px;
+  margin-left: 170px;
 `
 const Error = styled.div`
   font-size: 12px;
